@@ -55,7 +55,7 @@ const userModel = (sequelize, DataTypes) => {
       console.log(`auth basic function`)
       const user = await this.findOne({where: { username }});
       const valid = await bcrypt.compare(password, user.password);
-      console.log(`valid ${valid}`);
+      // console.log(`valid ${valid}`);
       if(valid){
         return user;
       } else {
@@ -70,9 +70,9 @@ const userModel = (sequelize, DataTypes) => {
     try {
       console.log(`auth token function`)
       const parsedToken = jwt.verify(token, SECRET);
-      console.log(`parsedToken ${JSON.stringify(parsedToken)}`);
+      // console.log(`parsedToken ${JSON.stringify(parsedToken)}`);
       const user = await this.findOne({where: { username: parsedToken.username }});
-      console.log(user);
+      // console.log(user);
       if(user){
         console.log('user is valid');
         return user;

@@ -13,15 +13,15 @@ const { users } = require('../models/index');
 router.post('/signup', async (req, res, next) => {
   try {
     console.log('sign up function');
-    console.log(req.body);
-    console.log(users);
+    // console.log(req.body);
+    // console.log(users);
     let response = await users.create(req.body);
-    console.log('i am here');
+    // console.log('i am here');
     const output = {
       username: response,
       token: response.token,
     }
-    console.log(`output ${output}`);
+    // console.log(`output ${output}`);
     res.status(201).json(output);
   } catch (e) {
     next(e.message);

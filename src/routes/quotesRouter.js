@@ -10,11 +10,14 @@ const dataModules = require('../models/index');
 router.param('model', (req, res, next) => {
   console.log('auth route function', req.params.model);
   const modelName = req.params.model;
+  // console.log(modelName);
   if (dataModules[modelName]) {
     req.model = dataModules[modelName];
+    // console.log('valid model');
     next();
   } else {
-    next('Invalid Model');
+    // next('Invalid Model');
+    res.status(404).send('Invalid Model');
   }
 });
 

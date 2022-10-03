@@ -21,10 +21,11 @@ const PORT = process.env.PORT || 3002;
 app.use(logger);
 
 // ************* Routes *****************
-app.use('/', () => {console.log('Welcome to my server - Jokes & Affirmations, please view my front-end app!')});
+
 app.use(authRoutes);
 app.use(quotesRoutes);
 
+// app.use('/', () => {console.log('Welcome to my server - Jokes & Affirmations, please view my front-end app!')});
 app.use('*', serverError);
 app.use(errorHandler);
 

@@ -45,3 +45,4 @@
 ## Links
 - Repo on GitHub: https://github.com/nurselaine/lab-09
 - Heroku link: https://jokes-and-affirmations.herokuapp.com/
+- Front-end Repo: https://github.com/nurselaine/lab-09-frontend/tree/main/lab-09-frontend

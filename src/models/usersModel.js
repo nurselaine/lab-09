@@ -12,6 +12,7 @@ const userModel = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING, 
       allowNull: false, 
+      unique: true,
     },
     password: {
       type: DataTypes.STRING,
@@ -51,8 +52,10 @@ const userModel = (sequelize, DataTypes) => {
   user.authenticateBasic = async function (username, password) {
     // Question - why is it using this - what is this referring to on this file?
     try{
+      console.log(`auth basic function`)
       const user = await this.findOne({where: { username }});
       const valid = await bcrypt.compare(password, user.password);
+      console.log(`valid ${valid}`);
       if(valid){
         return user;
       } else {
@@ -63,11 +66,15 @@ const userModel = (sequelize, DataTypes) => {
     }
   };
   
-  user.authenticateTokenasync = async function (token){
+  user.authenticateToken = async function (token){
     try {
+      console.log(`auth token function`)
       const parsedToken = jwt.verify(token, SECRET);
-      const user = await this.findOne({where: { username: parsedToken.username}});
+      console.log(`parsedToken ${JSON.stringify(parsedToken)}`);
+      const user = await this.findOne({where: { username: parsedToken.username }});
+      console.log(user);
       if(user){
+        console.log('user is valid');
         return user;
       } else {
         return `User Not Found`;
@@ -76,7 +83,7 @@ const userModel = (sequelize, DataTypes) => {
       console.log(`authenticate token error: ${e}`);
     }
   };
-
-}
+  return user;
+};
 
 module.exports = userModel;

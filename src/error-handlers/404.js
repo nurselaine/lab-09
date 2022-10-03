@@ -1,0 +1,9 @@
+'use strict';
+
+module.exports = (req, res, next) => {
+  const errorObject = {
+    status: 404,
+    message: 'Sorry, we could not find what you are looking for',
+  }
+  res.status(404).json(errorObject);
+}

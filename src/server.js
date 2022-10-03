@@ -5,6 +5,11 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 require('dotenv').config();
+const logger = require('./auth/middleware/logger');
+const authRoutes = require('./routes/authRouter');
+const quotesRoutes = require('./routes/quotesRouter');
+const serverError = require('./error-handlers/404');
+const errorHandler = require('./error-handlers/500');
 
 const app = express();
 app.use(cors());
@@ -13,16 +18,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 3002;
 
-
+app.use(logger);
 
 // ************* Routes *****************
+console.log('hello');
+app.use(authRoutes);
+app.use(quotesRoutes);
 
-app.use('*', () => {console.log(`this is my catch all FOR NOW : D`)});
+app.use('*', serverError);
+app.use(errorHandler);
 
 // ************* other *****************
 
-function start(PORT){
-  console.log(`listening on port ${3001}`);
+function start(){
+  app.listen(PORT, () => console.log(`listening on PORT ${PORT}`));
 }
 
 module.exports = {

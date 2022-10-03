@@ -23,7 +23,7 @@ const options = {
   }
 };
 
-const sequelize = new Sequelize(DATABASE_URL, {logging: false});
+const sequelize = new Sequelize(DATABASE_URL, options);
 const users = userSchema(sequelize, DataTypes);
 const jokes = jokeSchema(sequelize, DataTypes);
 const affirmations = affirmSchema(sequelize, DataTypes);
